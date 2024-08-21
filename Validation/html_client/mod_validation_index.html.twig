@@ -1,0 +1,33 @@
+{% extends request.ajax ? "layout_blank.html.twig" : "layout_default.html.twig" %}
+
+{% block meta_title %}{{ 'Contact Validation'|trans }}{% endblock %}
+
+{% block body_class %}validation{% endblock %}
+{% block breadcrumb %} <li class="active">{{ 'Contact Validation'|trans }}</li>{% endblock %}
+
+{% block page_header %}
+<article class="page-header">
+    <h1>{{ 'Contact Validation'|trans }}</h1>
+    <p>{{ 'This page confirms the accuracy of contact information for domain registrants, as required by ICANN regulations.'|trans }}</p>
+</article>
+{% endblock%}
+
+{% block content %}
+<div class="row">
+    <article class="span12 data-block">
+        <div class="data-container">
+            <section>
+                {% if message is defined %}
+                    {% if 'Error' in message %}
+                        <div class="alert alert-warning">{{ message|e }}</div>
+                    {% else %}
+                        <div class="alert alert-info">{{ message|e }}</div>
+                    {% endif %}
+                {% else %}
+                    <div class="alert alert-warning">No validation token provided in the URL.</div>
+                {% endif %}
+            </section>
+        </div>
+    </article>
+</div>
+{% endblock %}
