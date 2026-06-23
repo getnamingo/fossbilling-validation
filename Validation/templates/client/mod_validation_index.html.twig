@@ -3,31 +3,30 @@
 {% block meta_title %}{{ 'Contact Validation'|trans }}{% endblock %}
 
 {% block body_class %}validation{% endblock %}
-{% block breadcrumb %} <li class="active">{{ 'Contact Validation'|trans }}</li>{% endblock %}
-
-{% block page_header %}
-<article class="page-header">
-    <h1>{{ 'Contact Validation'|trans }}</h1>
-    <p>{{ 'This page confirms the accuracy of contact information for domain registrants, as required by ICANN regulations.'|trans }}</p>
-</article>
-{% endblock%}
+{% block breadcrumb %}<li class="breadcrumb-item active" aria-current="page"><a href="#">{{ 'Contact Validation'|trans }}</a></li>{% endblock %}
 
 {% block content %}
-<div class="row">
-    <article class="span12 data-block">
-        <div class="data-container">
-            <section>
-                {% if message is defined %}
-                    {% if 'Error' in message %}
-                        <div class="alert alert-warning">{{ message|e }}</div>
-                    {% else %}
-                        <div class="alert alert-info">{{ message|e }}</div>
-                    {% endif %}
+<div class="col-md-12">
+    <div class="card mb-4">
+        <div class="card-header py-3 py-3">
+            <div class="d-flex justify-content-between align-items-center">
+                <div>
+                    <h1 class="mb-1">{{ 'Contact Validation'|trans }}</h1>
+                    <span class="small text-muted">{{ 'This page confirms the accuracy of contact information for domain registrants, as required by ICANN regulations.'|trans }}</span>
+                </div>
+            </div>
+        </div>    
+        <div class="card-body">
+            {% if message is defined %}
+                {% if 'Error' in message %}
+                    <div class="alert alert-warning">{{ message|e }}</div>
                 {% else %}
-                    <div class="alert alert-warning">No validation token provided in the URL.</div>
+                    <div class="alert alert-info">{{ message|e }}</div>
                 {% endif %}
-            </section>
+            {% else %}
+                <div class="alert alert-warning">No validation token provided in the URL.</div>
+            {% endif %}
         </div>
-    </article>
+    </div>
 </div>
 {% endblock %}
