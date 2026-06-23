@@ -49,16 +49,32 @@ class Client implements \FOSSBilling\InjectionAwareInterface
         
         if (isset($token)) {
             // Look up token in database
-            $client = $this->di['db']->getAll('SELECT * FROM client WHERE custom_1 = :token', ['token' => $token]);
-            
+            $validation = $this->di['db']->getRow(
+                'SELECT * FROM domain_contact_validation WHERE validation_token = :token LIMIT 1',
+                ['token' => $token]
+            );
+
             // If token is found and not yet validated, update database and display success message
-            if ($client && $client['custom_2'] == 0) {
-                $contact_id = $client['id'];
-                $this->di['db']->exec( 'UPDATE client SET custom_2 = 1 WHERE id = ?' , [$contact_id] );
+            if ($validation && (int) $validation['is_validated'] === 0) {
+                $validationLog = json_encode([
+                    'timestamp' => date('Y-m-d H:i:s'),
+                    'event' => 'validated',
+                    'method' => 'email',
+                ], JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE);
+
+                $this->di['db']->exec(
+                    'UPDATE domain_contact_validation
+                     SET is_validated = 1,
+                         validation_checked_at = NOW(),
+                         validation_log = ?,
+                         updated_at = NOW()
+                     WHERE id = ?',
+                    [$validationLog, $validation['id']]
+                );
+
                 $message = 'Contact information validated successfully!';
-            }
-            // If token is not found or already validated, display error message
-            else {
+            } else {
+                // If token is not found or already validated, display error message
                 $message = 'Error: Invalid or already validated validation token.';
             }
         } else {
