@@ -1,12 +1,12 @@
 {
   "id": "validation",
   "type": "mod",
-  "name": "Domain Contact Verification",
-  "description": "Validates and confirms domain registrant contact details to ensure compliance with ICANN regulations",
+  "name": "Registrant Contact Verification",
+  "description": "Handles email verification links and confirms registrant contact details for ICANN compliance",
   "icon_url": "icon.svg",
   "homepage_url": "https://namingo.org",
-  "author": "Namingo Team",
+  "author": "Namingo",
   "author_url": "https://namingo.org/",
   "license": "Apache 2.0 - https://www.apache.org/licenses/LICENSE-2.0",
-  "version": "1.0.4"
+  "version": "1.0.5"
 }

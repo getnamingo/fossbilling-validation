@@ -1,5 +1,5 @@
-# Domain Contact Verification for FOSSBilling
-Validates and confirms domain registrant contact details to ensure compliance with ICANN regulations
+# Registrant Contact Verification for FOSSBilling
+Handles email verification links and confirms registrant contact details for ICANN compliance
 
 ## Installation
 
@@ -8,7 +8,7 @@ git clone https://github.com/getnamingo/fossbilling-validation
 mv fossbilling-validation/Validation /var/www/modules/
 ```
 
-- Go to Extensions > Overview in the admin panel and activate "Domain Contact Verification".
+- Go to Extensions > Overview in the admin panel and activate "Registrant Contact Verification".
 
 ## Usage Instructions
 
